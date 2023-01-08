@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"
-        integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.socket.io/4.5.4/socket.io.min.js"
+      integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI"
+      crossorigin="anonymous"
+    ></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/javascript/socket.js"></script>
-    <link rel="stylesheet" href="/css/chat.css">
-</head>
-<body>
-    <div class="messages">
-
+    <link rel="stylesheet" href="/css/chat.css" />
+  </head>
+  <body>
+    <div class="page">
+      <div>
+        <div class="messages">
+            <button class="load-more-messages">Load More</button>
+        </div>
+        <form class="send-msg-form" action="" method="post">
+          <input id="input-msg" type="text" placeholder="Type message" />
+          <button class="filler-button"></button>
+          <button id="send">Send</button>
+        </form>
+      </div>
     </div>
-    <form class="send-msg-form" action="" method="post">
-        <input id="input-msg" type="text" placeholder="type message">
-        <button id="send">Send</button>
-    </form>
+
     <script src="/javascript/sendMessage.js"></script>
-</body>
+  </body>
 </html>

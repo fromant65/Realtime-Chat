@@ -1,17 +1,71 @@
+body {
+    background-color: black;
+}
+
+.page {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+}
+
 .messages {
     width: 400px;
     height: 500px;
-    scroll-behavior: auto;
+    overflow-y: scroll;
     border: 1px solid black;
     border-radius: 10px;
+    background-color: #333;
 }
 
 .send-msg-form {
     display: inline-block;
     width: 380px;
     padding: 10px;
-    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #222;
+    display: flex;
     margin-top: 10px;
+    position: relative;
+}
+
+.send-msg-form input {
+    background-color: transparent;
+    border: none;
+    flex-grow: 1;
+    color: white;
+}
+
+.send-msg-form input:focus {
+    outline: none;
+}
+
+.send-msg-form:focus-within {
+    background-color: #333;
+}
+
+.filler-button {
+    width: 50px;
+    border: none;
+    background-color: transparent;
+}
+
+#send {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    color: white;
+    right: 0;
+    top: 0;
+    /*padding: 10px;*/
+    margin-right: 10px;
+}
+
+#send:hover {
+    background-color: #444;
 }
 
 .rec-msg-container {

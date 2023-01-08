@@ -1,0 +1,48 @@
+body {
+    background-color: black;
+}
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.login-form-container {
+    background-color: #222;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 20%;
+}
+
+form input {
+    display: block;
+    margin: auto;
+}
+
+#username {
+    border: none;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 10px;
+    margin: 10px;
+    color: white;
+}
+
+#username:focus {
+    outline: none;
+    background-color: #444;
+}
+
+#login {
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+}
+
+#login:hover {
+    cursor: pointer;
+    background-color: #444;
+}

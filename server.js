@@ -9,28 +9,35 @@ Tareas pendientes
 - Rooms?
 */
 
+require("dotenv").config();
 const express = require("express");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const path = require("path");
 const app = express();
 const sessions = require("express-session");
+const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
+const connectDB = require("./config/dbConn.js");
+const PORT = process.env.PORT || 3000;
 const oneDay = 1000 * 60 * 60 * 24;
 const sessionOptions = {
-  secret: "123",
+  secret: process.env.ACCESS_TOKEN_SECRET,
   saveUninitialized: true,
   cookie: { maxAge: oneDay },
   resave: false,
 };
 
+//connect to Mongo DB
+connectDB();
+
+//Middleware
 app.use(sessions(sessionOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "/public")));
 
-/*app.get("/", (req, res) => {
-  res.send("pagina cargada");
-});*/
+//Routes
 app.use("/", require("./routes/root"));
 
 const httpServer = createServer(app);
@@ -52,4 +59,7 @@ io.on("connection", (socket) => {
   //console.log(socket.id); // ojIckSD2jqNzOqIrAGzL
 });
 
-httpServer.listen(3000, () => console.log(`Server running on port ${3000}`));
+mongoose.connection.once("open", () => {
+  console.log("Connected to MongoDB");
+  httpServer.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+});
