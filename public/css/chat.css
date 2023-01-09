@@ -1,5 +1,6 @@
 body {
     background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .page {
@@ -16,6 +17,7 @@ body {
     border: 1px solid black;
     border-radius: 10px;
     background-color: #333;
+    scroll-behavior: smooth;
 }
 
 .send-msg-form {
@@ -72,12 +74,18 @@ body {
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
+    max-width: 300px;
     width: fit-content;
-    background-color: #ff8888;
+    background-color: #f0eefe;
+}
+
+.rec-msg-sender {
+    font-weight: bold;
 }
 
 .sent-msg-container {
     position: relative;
+    margin-top: 10px;
 }
 
 .filler-div {
@@ -91,12 +99,49 @@ body {
     position: absolute;
     right: 0;
     padding: 10px;
-    margin: 10px;
+    margin-right: 10px;
     border-radius: 10px;
+    max-width: 300px;
     display: inline-block;
-    background-color: #88ff88;
+    background-color: #c3dffa;
 }
 
 .rec-msg-sender {
     color: white
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    padding: 2px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.load-more-messages {
+    width: 100%;
+    text-align: center;
+    background-color: #ddd;
+    border: none;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.load-more-messages:hover {
+    background-color: #aaa;
+    cursor: pointer;
 }

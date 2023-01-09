@@ -52,9 +52,9 @@ io.on("connection", (socket) => {
     console.log(args);
   });
   */
-  socket.on("message", ({ message, user }) => {
+  socket.on("message", ({ message, user, id }) => {
     //console.log(message, user);
-    socket.broadcast.emit("message", { message: message, user });
+    socket.broadcast.emit("message", { message: message, user: user, id: id });
   });
   //console.log(socket.id); // ojIckSD2jqNzOqIrAGzL
 });
