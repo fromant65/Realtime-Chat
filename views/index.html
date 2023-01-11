@@ -17,8 +17,15 @@
   <body>
     <div class="page">
       <div>
+        <form class="changeRoom">
+          <input id='room-id' type="text" placeholder="enter room id">
+          <button class="filler-button-room"></button>
+          <button id="send-room-id">
+            Change room
+          </button>
+        </form>
         <div class="messages">
-            <button class="load-more-messages" disabled>Load More</button>
+          <button class="load-more-messages" disabled>Load More</button>
         </div>
         <form class="send-msg-form" action="" method="post">
           <input id="input-msg" type="text" placeholder="Type message" />
@@ -27,7 +34,10 @@
         </form>
       </div>
     </div>
-
     <script src="/javascript/sendMessage.js"></script>
+    <script src="/javascript/createMessage.js"></script>
+    <script src="/javascript/fetchMessages.js"></script>
+    <script src="/javascript/generateColors.js"></script>
+    <script src="/javascript/changeRoom.js"></script>
   </body>
 </html>

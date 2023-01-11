@@ -46,17 +46,24 @@ const io = new Server(httpServer, {
 });
 
 io.on("connection", (socket) => {
-  /*
-  socket.emit("hello from server", 1, "2", { 3: Buffer.from([4]) });
-  socket.on("hello from client", (...args) => {
-    console.log(args);
+  socket.emit("conn", { conn: true });
+
+  socket.on("message", ({ message, user, id, room }) => {
+    //console.log(message, user, room);
+    socket.to(room).emit("message", { message: message, user: user, id: id });
   });
-  */
-  socket.on("message", ({ message, user, id }) => {
-    //console.log(message, user);
-    socket.broadcast.emit("message", { message: message, user: user, id: id });
+
+  socket.on("enter-room", ({ room }) => {
+    console.log(`joining ${room}`);
+    socket.join(room);
+    console.log(socket.rooms);
   });
-  //console.log(socket.id); // ojIckSD2jqNzOqIrAGzL
+
+  socket.on("leave-room", ({ room }) => {
+    console.log(`leaving ${room}`);
+    socket.leave(room);
+  });
+  //console.log(socket.id);
 });
 
 mongoose.connection.once("open", () => {

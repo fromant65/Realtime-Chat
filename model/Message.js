@@ -6,6 +6,7 @@ const Message = new Schema({
   message: String,
   date: Date,
   id: Number,
+  room: String,
 });
 
 module.exports = mongoose.model("Message", Message);

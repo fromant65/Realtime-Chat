@@ -3,7 +3,11 @@ const router = express.Router();
 const path = require("path");
 const Message = require("../model/Message");
 
-router.get("^/$|/index(.html)?", (req, res) => {
+router.get("^/$|/index(/.)?", (req, res) => {
+  res.redirect("/login");
+});
+
+router.get("/index/:room", (req, res) => {
   let session = req.session;
   if (session.userid)
     res.sendFile(path.join(__dirname, "..", "views", "index.html"));
@@ -18,7 +22,8 @@ router.post("/login", (req, res) => {
   let session = req.session;
   if (req.body.username) {
     session.userid = req.body.username;
-    res.redirect("/index");
+    const room = req.body.room || "default";
+    res.redirect(`/index/${room}`);
   }
 });
 
@@ -31,10 +36,11 @@ router.post("/send-msg", async (req, res) => {
   const content = req.body.content;
   const author = req.body.author;
   const date = new Date();
-  console.log("msg sent");
+  const room = req.body.room;
+  //console.log("msg sent");
   try {
     const lastMessage = await Message.findOne().sort("-date").exec();
-    console.log(lastMessage);
+    //console.log(lastMessage);
     const lastId = lastMessage.id || 0;
     const orderID = lastId + 1;
     const message = await Message.create({
@@ -42,8 +48,9 @@ router.post("/send-msg", async (req, res) => {
       message: content,
       date: date,
       id: orderID,
+      room: room,
     });
-    console.log(message);
+    //console.log(message);
     res.status(201).json({ success: true, message: message });
   } catch (err) {
     console.log(err.message);
@@ -53,6 +60,7 @@ router.post("/send-msg", async (req, res) => {
 
 router.post("/load-msg", async (req, res) => {
   let messages = req.body.messages;
+  const room = req.body.room;
   try {
     const messagesArray = [];
     const lastMsg = (await Message.findOne().sort("-date").exec()) || 0;
@@ -60,7 +68,7 @@ router.post("/load-msg", async (req, res) => {
     //console.log(currentID, messages, lastMsg);
     while (messages > 0 && currentID > 0) {
       //console.log(currentID);
-      const msg = await Message.findOne({ id: currentID });
+      const msg = await Message.findOne({ id: currentID, room: room });
       if (msg) {
         messagesArray.push(msg);
         messages--;
@@ -78,6 +86,7 @@ router.post("/load-msg", async (req, res) => {
 router.post("/load-new-msg", async (req, res) => {
   let messages = req.body.messages;
   let lastMsgId = req.body.lastMsg;
+  const room = req.body.room;
   try {
     const messagesArray = [];
     const lastMsg = (await Message.findById(lastMsgId).exec()) || 0;
@@ -85,7 +94,7 @@ router.post("/load-new-msg", async (req, res) => {
     //console.log(currentID, messages, lastMsg);
     while (messages > 0 && currentID > 0) {
       //console.log(currentID);
-      const msg = await Message.findOne({ id: currentID });
+      const msg = await Message.findOne({ id: currentID, room: room });
       if (msg) {
         messagesArray.push(msg);
         messages--;
@@ -99,4 +108,5 @@ router.post("/load-new-msg", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
 module.exports = router;

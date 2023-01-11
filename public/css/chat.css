@@ -20,7 +20,8 @@ body {
     scroll-behavior: smooth;
 }
 
-.send-msg-form {
+.send-msg-form,
+.changeRoom {
     display: inline-block;
     width: 380px;
     padding: 10px;
@@ -31,18 +32,21 @@ body {
     position: relative;
 }
 
-.send-msg-form input {
+.send-msg-form input,
+#room-id {
     background-color: transparent;
     border: none;
     flex-grow: 1;
     color: white;
 }
 
-.send-msg-form input:focus {
+.send-msg-form input:focus,
+#room-id:focus {
     outline: none;
 }
 
-.send-msg-form:focus-within {
+.send-msg-form:focus-within,
+.changeRoom:focus-within {
     background-color: #333;
 }
 
@@ -52,7 +56,14 @@ body {
     background-color: transparent;
 }
 
-#send {
+.filler-button-room {
+    width: 100px;
+    border: none;
+    background-color: transparent;
+}
+
+#send,
+#send-room-id {
     position: absolute;
     background-color: transparent;
     border: none;
@@ -66,7 +77,8 @@ body {
     margin-right: 10px;
 }
 
-#send:hover {
+#send:hover,
+#send-room-id:hover {
     background-color: #444;
 }
 

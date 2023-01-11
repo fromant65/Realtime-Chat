@@ -20,7 +20,8 @@ form input {
     margin: auto;
 }
 
-#username {
+#username,
+#room {
     border: none;
     padding: 10px;
     background-color: #333;
