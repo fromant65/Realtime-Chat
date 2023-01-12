@@ -3,6 +3,10 @@ const router = express.Router();
 const path = require("path");
 const Message = require("../model/Message");
 
+router.get("/", (req, res) => {
+  res.redirect("/login");
+});
+
 router.get("^/$|/index(/.)?", (req, res) => {
   res.redirect("/login");
 });
@@ -23,12 +27,14 @@ router.post("/login", (req, res) => {
   if (req.body.username) {
     session.userid = req.body.username;
     const room = req.body.room || "default";
+    console.log(req.session);
     res.redirect(`/index/${room}`);
   }
 });
 
 router.get("/get-username", (req, res) => {
   let userid = req.session.userid;
+  console.log(req.session);
   res.json({ userid });
 });
 
