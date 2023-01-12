@@ -19,7 +19,7 @@ const sessions = require("express-session");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const connectDB = require("./config/dbConn.js");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3500;
 const oneDay = 1000 * 60 * 60 * 24;
 const sessionOptions = {
   secret: process.env.ACCESS_TOKEN_SECRET,
@@ -43,6 +43,11 @@ app.use("/", require("./routes/root"));
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   /* options */
+  cors: {
+    origin: process.env.PORT
+      ? "https://realtime-chat-xqpq.onrender.com"
+      : "http://localhost:3500",
+  },
 });
 
 io.on("connection", (socket) => {
