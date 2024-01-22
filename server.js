@@ -3,12 +3,6 @@
  * https://socket.io/docs/v4/
  */
 
-/*
-Tareas pendientes
-- Estilizar frontend
-- Rooms?
-*/
-
 require("dotenv").config();
 const app = require("./config/appConfig.js");
 const { createServer } = require("http");

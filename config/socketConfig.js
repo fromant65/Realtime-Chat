@@ -3,14 +3,12 @@ const socketEvents = (io) => {
     socket.emit("conn", { conn: true });
 
     socket.on("message", ({ message, user, id, room }) => {
-      console.log(message, user, room);
       socket.to(room).emit("message", { message: message, user: user, id: id });
     });
 
     socket.on("enter-room", ({ room }) => {
       console.log(`joining ${room}`);
       socket.join(room);
-      console.log(socket.rooms);
     });
 
     socket.on("leave-room", ({ room }) => {
