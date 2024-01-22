@@ -1,21 +1,16 @@
-const socketEvents = (io) => {
-  io.on("connection", (socket) => {
-    socket.emit("conn", { conn: true });
-
-    socket.on("message", ({ message, user, id, room }) => {
-      socket.to(room).emit("message", { message: message, user: user, id: id });
-    });
-
-    socket.on("enter-room", ({ room }) => {
-      console.log(`joining ${room}`);
-      socket.join(room);
-    });
-
-    socket.on("leave-room", ({ room }) => {
-      console.log(`leaving ${room}`);
-      socket.leave(room);
-    });
+const { createServer } = require("http");
+const { Server } = require("socket.io");
+//Creating socket server
+function createSocketServer(app) {
+  const httpServer = createServer(app);
+  const io = new Server(httpServer, {
+    cors: {
+      origin: process.env.PORT
+        ? "https://realtime-chat-xqpq.onrender.com"
+        : "http://localhost:3500",
+    },
   });
-};
+  return {httpServer,io};
+}
 
-module.exports= socketEvents;
+module.exports = createSocketServer;

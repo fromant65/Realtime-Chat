@@ -5,9 +5,8 @@
 
 require("dotenv").config();
 const app = require("./config/appConfig.js");
-const { createServer } = require("http");
-const { Server } = require("socket.io");
-const socketEvents = require("./config/socketConfig.js");
+const createSocketServer = require("./config/socketConfig.js");
+const socketEvents = require("./config/socketEvents.js");
 const mongoose = require("mongoose");
 const connectDB = require("./config/dbConn.js");
 const PORT = process.env.PORT || 3500;
@@ -15,15 +14,8 @@ const PORT = process.env.PORT || 3500;
 //connect to Mongo DB
 connectDB();
 
-//Creating socket server
-const httpServer = createServer(app);
-const io = new Server(httpServer, {
-  cors: {
-    origin: process.env.PORT
-      ? "https://realtime-chat-xqpq.onrender.com"
-      : "http://localhost:3500",
-  },
-});
+//Create socket server
+const {httpServer,io} = createSocketServer(app);
 
 //Add events to socket
 socketEvents(io);
