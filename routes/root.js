@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
   res.redirect("/login");
 });
 
-router.get("^/$|/index(/.)?", (req, res) => {
+router.get("/index", (req, res) => {
   res.redirect("/login");
 });
 
