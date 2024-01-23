@@ -4,8 +4,6 @@ function generateColorByUsername(user) {
   const posUser = Math.abs(hashUser);
   let hashStr = posUser.toString(16);
   hashStr = [...hashStr].reverse().join("");
-  //console.log(colorHex, user, user.toString(16));
-  //console.log(hashStr);
   const red = `${hashStr[0] || 6}${hashStr[3] || 6}`;
   const green = `${hashStr[1] || 6}${hashStr[4] || 6}`;
   const blue = `${hashStr[2] || 6}${hashStr[5] || 6}`;

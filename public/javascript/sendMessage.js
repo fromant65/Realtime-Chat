@@ -10,7 +10,6 @@ addEventListener("load", async () => {
 });
 
 socket.on("message", ({ message, user, id }) => {
-  //console.log(`mensaje recibido: "${message}" de ${user}`);
   messages.appendChild(recievedMessage(message, user, id));
 });
 
@@ -37,7 +36,6 @@ loadMore.addEventListener("click", async (e) => {
     }),
   });
   const data = await req.json();
-  //console.log(data.messages);
   loadNewMessages(data.messages);
   loadMore.disabled = false;
 });

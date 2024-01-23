@@ -12,7 +12,6 @@ async function fetchMessages() {
     }),
   });
   const data = await req.json();
-  //console.log(data.messages);
   loadMessages(data.messages);
 }
 
@@ -21,14 +20,12 @@ async function loadMessages(msgs) {
   const data = await reqUser.json();
   const userid = data.userid;
   msgs = msgs.reverse();
-  //console.log(msgs);
   for (message in msgs) {
     if (msgs[message].name === userid) {
       messages.appendChild(
         ownMessage(msgs[message].message, msgs[message]._id)
       );
     } else {
-      //console.log(msgs[message].name, msgs[message], message);
       messages.appendChild(
         recievedMessage(
           msgs[message].message,

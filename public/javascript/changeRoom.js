@@ -1,8 +1,6 @@
 const roomId = document.getElementById("room-id");
 const sendRoomId = document.getElementById("send-room-id");
 
-//console.log(roomId, sendRoomId);
-
 sendRoomId.addEventListener("click", async (e) => {
   e.preventDefault();
   const reqUser = await fetch("/get-username");
@@ -14,5 +12,4 @@ sendRoomId.addEventListener("click", async (e) => {
   setTimeout(() => {
     location.pathname = `/index/${room}`;
   }, 500);
-  //console.log(currentRoom);
 });
