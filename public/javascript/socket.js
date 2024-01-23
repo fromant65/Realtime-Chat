@@ -1,26 +1,14 @@
 const socket = io();
-//console.log(socket);
 
 const currentRoom = getRoom();
-
-socket.on("conn", ({ conn }) => {
-  socket.emit("enter-room", { room: currentRoom });
-  //console.log("connection", conn);
+socket.on("conn", async ({ conn }) => {
+  let userReq = await fetch("/get-username");
+  let userid = await userReq.json();
+  socket.emit("enter-room", { room: currentRoom, user:userid });
 });
 
 function getRoom() {
   const roomArray = location.pathname.split("index/");
   const room = roomArray[1] || "default";
-  //console.log(roomArray, room);
   return room;
 }
-
-/*
-// send a message to the server
-socket.emit("hello from client", 5, "6", { 7: Uint8Array.from([8]) });
-// receive a message from the server
-socket.on("hello from server", (...args) => {
-  // ...
-  console.log(args);
-});
-*/
