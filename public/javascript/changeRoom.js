@@ -9,8 +9,8 @@ sendRoomId.addEventListener("click", async (e) => {
   const dataUser = await reqUser.json();
   const room = roomId.value;
   const currentRoom = getRoom();
-  socket.emit("leave-room", { room: currentRoom });
-  socket.emit("enter-room", { room });
+  socket.emit("leave-room", { room: currentRoom, user:dataUser.userid });
+  socket.emit("enter-room", { room, user:dataUser.userid  });
   setTimeout(() => {
     location.pathname = `/index/${room}`;
   }, 500);

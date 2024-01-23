@@ -38,11 +38,11 @@ describe("Socket.io test", function () {
   it("Should join a room successfully",  (done) => {
     client1.on("joined-room",(data)=>{
         console.log("client joined the room");
-        expect(data).toEqual({room})
+        expect(data).toEqual({room,user:"client2"})
         done();
     })
-    client1.emit("enter-room", { room });
-    client2.emit("enter-room", { room });
+    client1.emit("enter-room", { room, user:"client1"});
+    client2.emit("enter-room", { room, user:"client2" });
   });
 
   it("Should emit 'message' event correctly", (done) => {
@@ -61,10 +61,10 @@ describe("Socket.io test", function () {
   it("Should leave a room successfully", (done) => {
     client2.on("left-room",(data)=>{
         console.log("client left the room");
-        expect(data).toEqual({room});
-        client2.emit("leave-room", { room });
+        expect(data).toEqual({room, user:"client1"});
+        client2.emit("leave-room", { room, user:"client2" });
         done();
     })
-    client1.emit("leave-room", { room });
+    client1.emit("leave-room", { room, user:"client1" });
   });
 });
